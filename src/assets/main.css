@@ -1,35 +1,32 @@
-@import './base.css';
+@import './colors.css';
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+
+  font-family: 'Nunito', sans-serif;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+header {
+  background-color: var(--mask-green);
+  border-bottom: 5px solid var(--feather-green);
+
+  padding: 1rem;
+
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-synthesis: none;
+  color: var(--snow);
+  letter-spacing: 0.4rem;
+  user-select: none;
+
+  transition: text-shadow 200ms;
 }
 
 @media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+  header:hover {
+    text-shadow: 0 0 4rem var(--eel);
   }
 }
