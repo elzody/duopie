@@ -1,35 +1,53 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-import { PhFire } from '@phosphor-icons/vue';
-
-const data = ref({
-  image: "https://simg-ssl.duolingo.com/avatars/7699505/1iZJexKMq1/xlarge",
-  name: "elizabeth",
-  username: "Liza_72",
-  streak: 504,
-});
-</script>
-
 <template>
   <article class="user-card">
-    <img class="user-card-img" :src="data.image" alt="profile picture" />
+    <ImageSkeleton v-if="user.picture == undefined" width="8rem" background-color="var(--swan)" />
+    <img v-else class="user-card-img" :src="picture" alt="profile picture" />
+
     <div class="user-card-info">
-      <div class="user-card-name">{{ data.name }}</div>
-      <div class="user-card-username">{{ data.username }}</div>
+      <div class="user-card-name">
+        <TextSkeleton v-if="user.name == undefined" width="100%" height="1.5rem" color="var(--swan)" />
+        <span v-else>{{ user.name }}</span>
+      </div>
+
+      <div class="user-card-username">
+        <TextSkeleton v-if="user.username == undefined" width="50%" height="1rem" color="var(--swan)" />
+        <span v-else>{{ user.username }}</span>
+      </div>
+
       <div class="user-card-streak">
         <PhFire :size="24" weight="duotone" />
-        <span>{{ data.streak }}</span>
+
+        <TextSkeleton v-if="user.streak == undefined" width="20%" height="1rem" color="var(--swan)" />
+        <span v-else>{{ user.streak }}</span>
       </div>
     </div>
   </article>
 </template>
+
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import { PhFire } from '@phosphor-icons/vue';
+import type { User } from '../types';
+import TextSkeleton from './skeletons/TextSkeleton.vue';
+import ImageSkeleton from './skeletons/ImageSkeleton.vue';
+
+interface UserCardProps {
+  user: User,
+}
+
+const props = defineProps<UserCardProps>();
+
+const picture = computed(() => {
+  return `https://${props.user.picture}/xlarge`;
+});
+</script>
 
 <style>
 .user-card {
   display: flex;
   border-radius: 1rem;
   padding: 1rem;
-  width: fit-content;
+  width: 300px;
   height: 8rem;
   box-shadow: 0 0 1rem var(--swan);
 }
@@ -37,6 +55,7 @@ const data = ref({
 .user-card-img {
   width: 8rem;
   height: 8rem;
+  flex: 0 0 auto;
   border-radius: 50%;
   box-shadow: 0 0 1rem var(--swan);
 }
@@ -44,6 +63,7 @@ const data = ref({
 .user-card-info {
   display: flex;
   flex-flow: column nowrap;
+  flex: 1 0 auto;
   justify-content: center;
   padding: 0 20px;
 }
@@ -65,6 +85,7 @@ const data = ref({
 
   & svg {
     color: var(--fox);
+    margin-right: 2px;
   }
 }
 </style>
