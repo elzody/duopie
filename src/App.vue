@@ -1,6 +1,11 @@
-<script setup lang="ts">
-</script>
+<template>
+  <SearchBar />
+  <UserCard />
+</template>
 
-<template></template>
+<script setup lang="ts">
+import SearchBar from './components/SearchBar.vue';
+import UserCard from './components/UserCard.vue';
+</script>
 
 <style scoped></style>
