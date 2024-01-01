@@ -28,11 +28,11 @@
 
     <div class="stats-card-item">
       <div>
-        <PhShield class="stats-card-item-icon" color="var(--beak-inner)" :size="24" weight="fill" />
+        <PhShield class="stats-card-item-icon" :color="`var(--${league.toLowerCase()})`" :size="24" weight="fill" />
 
         <div>
-          <TextSkeleton v-if="user.tier == undefined" width="70%" height="22px" color="var(--swan)" />
-          <span v-else class="stats-card-item-data">{{ user.tier }}</span>
+          <TextSkeleton v-if="league == 'default'" width="70%" height="22px" color="var(--swan)" />
+          <span v-else class="stats-card-item-data">{{ league }}</span>
 
           <span class="stats-card-item-label">current league</span>
         </div>
@@ -58,12 +58,20 @@
 import { PhFire, PhLightning, PhMedal, PhShield } from '@phosphor-icons/vue';
 import TextSkeleton from './skeletons/TextSkeleton.vue';
 import type { Profile } from '../types';
+import { Leagues } from '../types';
+import { computed } from 'vue';
 
 interface StatsCardProps {
   user: Profile,
 }
 
 const props = defineProps<StatsCardProps>();
+
+const league = computed(() => {
+  const l = Leagues[props.user.tier];
+
+  return Leagues[props.user.tier] ?? "default";
+});
 </script>
 
 <style>

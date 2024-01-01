@@ -11,4 +11,17 @@
   --bee: rgb(255, 200, 0);
   --beak-highlight: rgb(255, 222, 0);
   --beak-inner: rgb(182, 110, 40);
+
+  /* league colors */
+  --bronze: rgb(213, 170, 130);
+  --silver: rgb(208, 220, 230);
+  --gold: rgb(254, 213, 64);
+  --sapphire: rgb(55, 185, 247);
+  --ruby: rgb(255, 96, 96);
+  --emerald: rgb(136, 207, 31);
+  --amethyst: rgb(210, 141, 255);
+  --pearl: rgb(255, 182, 226);
+  --obsidian: rgb(86, 85, 94);
+  --diamond: rgb(159, 236, 237);
+  --default: var(--hare);
 }

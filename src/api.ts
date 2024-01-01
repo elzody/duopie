@@ -26,7 +26,7 @@ async function getUser(username: string): Promise<User[]> {
 
   const params = new URLSearchParams({
     username,
-    fields: "users{courses{title,xp,crowns,id},name,username,id,picture,streak,totalXp}"
+    fields: "users{courses{title,xp,crowns,id},name,creationDate,username,id,picture,streak,totalXp}"
   }).toString();
 
   const request = await fetch(`${url}?${params}`);

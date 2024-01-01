@@ -5,6 +5,7 @@ interface User {
   username: string,
   totalXp: number,
   id: number,
+  creationDate: number,
   picture: string,
   streak: number,
   courses: Course[],

@@ -9,3 +9,6 @@ export type { Leaderboard };
 
 import type { Profile } from './types/Profile';
 export type { Profile };
+
+import { Leagues } from './types/League';
+export { Leagues };

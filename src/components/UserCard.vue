@@ -5,8 +5,8 @@
 
     <div class="user-card-info">
       <div class="user-card-name">
-        <TextSkeleton v-if="user.name == undefined" width="100%" height="1.5rem" color="var(--swan)" />
-        <span v-else>{{ user.name }}</span>
+        <TextSkeleton v-if="name == undefined" width="100%" height="1.5rem" color="var(--swan)" />
+        <span v-else>{{ name }}</span>
       </div>
 
       <div class="user-card-username">
@@ -14,11 +14,11 @@
         <span v-else>{{ user.username }}</span>
       </div>
 
-      <div class="user-card-streak">
-        <PhFire :size="24" weight="duotone" />
+      <div class="user-card-creation-date">
+        <PhClock :size="24" weight="fill" />
 
         <TextSkeleton v-if="user.streak == undefined" width="20%" height="1rem" color="var(--swan)" />
-        <span v-else>{{ user.streak }}</span>
+        <span v-else>{{ creationDate }}</span>
       </div>
     </div>
   </article>
@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { PhFire } from '@phosphor-icons/vue';
+import { PhClock } from '@phosphor-icons/vue';
 import type { Profile } from '../types';
 import TextSkeleton from './skeletons/TextSkeleton.vue';
 import ImageSkeleton from './skeletons/ImageSkeleton.vue';
@@ -39,6 +39,22 @@ const props = defineProps<UserCardProps>();
 
 const picture = computed(() => {
   return `https://${props.user.picture}/xlarge`;
+});
+
+const name = computed(() => {
+  return props.user.name ?? props.user.username;
+});
+
+const creationDate = computed(() => {
+  const date = new Date(props.user.creationDate * 1000);
+
+  const intlDate = new Intl.DateTimeFormat('en-US', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(date);
+
+  return intlDate.toString();
 });
 </script>
 
@@ -70,22 +86,25 @@ const picture = computed(() => {
 
 .user-card-name {
   font-size: 1.5rem;
+  text-overflow: ellipsis;
 }
 
 .user-card-username {
   color: var(--eel);
+  text-overflow: ellipsis;
 }
 
-.user-card-streak {
+.user-card-creation-date {
   margin-top: 1rem;
+  color: var(--wolf);
 
   & * {
     vertical-align: middle;
   }
 
   & svg {
-    color: var(--fox);
-    margin-right: 2px;
+    color: var(--hare);
+    margin-right: 5px;
   }
 }
 </style>
