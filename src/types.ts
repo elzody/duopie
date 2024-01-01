@@ -3,3 +3,9 @@ export type { User };
 
 import type { Course } from './types/Course';
 export type { Course };
+
+import type { Leaderboard } from './types/Leaderboard';
+export type { Leaderboard };
+
+import type { Profile } from './types/Profile';
+export type { Profile };

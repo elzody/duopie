@@ -24,9 +24,9 @@ watch(userInput, () => {
   clearTimeout(timer.value);
 
   timer.value = setTimeout(async () => {
-    const user = await searchUser(userInput.value);
+    const profile = await searchUser(userInput.value);
 
-    userStore.setUser(user);
+    userStore.setUser(profile);
 
     timer.value = 0;
   }, 2000);
@@ -46,7 +46,7 @@ watch(userInput, () => {
 
 .search-bar {
   border: 2px solid var(--swan);
-  border-radius: 1rem;
+  border-radius: 15px;
   background-color: var(--polar);
   padding: 10px;
   width: 400px;

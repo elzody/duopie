@@ -1,23 +1,23 @@
 import { reactive } from 'vue';
-import type { User, Course } from '../types';
+import type { Profile } from '../types';
 
 interface UserStore {
-  user: User,
+  user: Profile,
 
-  setUser: (user: User) => void,
-  getUser: () => User,
+  setUser: (u: Profile) => void,
+  getUser: () => Profile,
 }
 
 const userStore: UserStore = reactive({
-  user: {} as User,
+  user: {} as Profile,
 
-  setUser(user: User) {
-    this.user = user;
+  setUser(u: Profile) {
+    this.user = u;
   },
 
   getUser() {
     return this.user;
-  }
+  },
 });
 
 export { userStore };

@@ -27,12 +27,12 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { PhFire } from '@phosphor-icons/vue';
-import type { User } from '../types';
+import type { Profile } from '../types';
 import TextSkeleton from './skeletons/TextSkeleton.vue';
 import ImageSkeleton from './skeletons/ImageSkeleton.vue';
 
 interface UserCardProps {
-  user: User,
+  user: Profile,
 }
 
 const props = defineProps<UserCardProps>();
@@ -45,10 +45,10 @@ const picture = computed(() => {
 <style>
 .user-card {
   display: flex;
-  border-radius: 1rem;
-  padding: 1rem;
-  width: 300px;
-  height: 8rem;
+  border-radius: 30px;
+  margin: 100px;
+  padding: 20px;
+  width: 350px;
   box-shadow: 0 0 1rem var(--swan);
 }
 
@@ -57,7 +57,7 @@ const picture = computed(() => {
   height: 8rem;
   flex: 0 0 auto;
   border-radius: 50%;
-  box-shadow: 0 0 1rem var(--swan);
+  box-shadow: 0 0 0.7rem var(--swan);
 }
 
 .user-card-info {

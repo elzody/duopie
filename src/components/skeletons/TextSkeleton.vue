@@ -18,7 +18,7 @@ const styles = reactive({
   height: props.height,
   display: 'inline-block',
   'background-color': props.color,
-  'border-radius': '0.5rem',
+  'border-radius': '30px',
   'vertical-align': 'middle',
 });
 </script>

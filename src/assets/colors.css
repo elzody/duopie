@@ -8,4 +8,7 @@
   --hare: rgb(175, 175, 175);
   --swan: rgb(229, 229, 229);
   --polar: rgb(247, 247, 247);
+  --bee: rgb(255, 200, 0);
+  --beak-highlight: rgb(255, 222, 0);
+  --beak-inner: rgb(182, 110, 40);
 }

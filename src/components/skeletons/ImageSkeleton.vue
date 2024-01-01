@@ -18,6 +18,6 @@ const styles = reactive({
   height: props.height ?? props.width,
   'background-color': props.backgroundColor,
   'border-radius': '50%',
-  'box-shadow': '0 0 1rem var(--swan)',
+  'box-shadow': '0 0 0.7rem var(--swan)',
 });
 </script>
