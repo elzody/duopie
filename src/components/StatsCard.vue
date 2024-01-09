@@ -110,8 +110,6 @@ interface StatsCardProps {
 const props = defineProps<StatsCardProps>();
 
 const league = computed(() => {
-  const l = Leagues[props.user.tier];
-
   return Leagues[props.user.tier] ?? "default";
 });
 </script>
