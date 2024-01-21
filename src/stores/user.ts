@@ -1,29 +1,17 @@
-import { reactive } from 'vue';
-import type { Profile, Course } from '../types';
+import type { Profile } from '@/types';
+import { defineStore } from 'pinia';
 
-interface UserStore {
-  user: Profile,
-
-  setUser: (u: Profile) => void,
-  getUser: () => Profile,
-
-  getCourses: () => Course[],
-}
-
-const userStore: UserStore = reactive({
-  user: {} as Profile,
-
-  setUser(u: Profile) {
-    this.user = u;
+export const useProfileStore = defineStore('profile', {
+  state: () => ({
+    profile: {} as Profile,
+  }),
+  getters: {
+    courses: state => state.profile.courses,
+    tier: state => state.profile.tier,
   },
-
-  getUser() {
-    return this.user;
-  },
-
-  getCourses() {
-    return this.user.courses;
+  actions: {
+    setProfile(p: Profile) {
+      this.profile = p;
+    }
   }
-});
-
-export { userStore };
+})

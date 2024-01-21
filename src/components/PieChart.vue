@@ -1,23 +1,19 @@
 <template>
   <div class="pie-chart">
-    <canvas v-if="user.courses" ref="canvas" width="500" height="500"></canvas>
+    <canvas v-if="profileStore.profile.courses" ref="canvas" width="500" height="500"></canvas>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onUpdated } from "vue";
-import type { Profile } from "../types";
-import Pie from "../pie";
+import { useProfileStore } from "@/stores/user";
+import Pie from "@/pie";
 
-interface PieChartProps {
-  user: Profile;
-}
-
-const props = defineProps<PieChartProps>();
+const profileStore = useProfileStore();
 const canvas = ref<HTMLCanvasElement>()!;
 
 onUpdated(() => {
-  const pie = Pie.from(props.user.courses, {
+  const pie = Pie.from(profileStore.profile.courses, {
     renderingContext: canvas.value!.getContext("2d")!,
     radius: canvas.value!.clientWidth / 2 - 20,
   });

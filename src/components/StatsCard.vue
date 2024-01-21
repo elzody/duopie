@@ -2,21 +2,11 @@
   <article class="stats-card">
     <div class="stats-card-item">
       <div>
-        <PhFire
-          class="stats-card-item-icon"
-          color="var(--fox)"
-          :size="24"
-          weight="fill"
-        />
+        <PhFire class="stats-card-item-icon" color="var(--fox)" :size="24" weight="fill" />
 
         <div>
-          <TextSkeleton
-            v-if="user.streak == undefined"
-            width="40%"
-            height="22px"
-            color="var(--swan)"
-          />
-          <span v-else class="stats-card-item-data">{{ user.streak }}</span>
+          <TextSkeleton v-if="streak == undefined" width="40%" height="22px" color="var(--swan)" />
+          <span v-else class="stats-card-item-data">{{ streak }}</span>
 
           <span class="stats-card-item-label">day streak</span>
         </div>
@@ -25,21 +15,11 @@
 
     <div class="stats-card-item">
       <div>
-        <PhLightning
-          class="stats-card-item-icon"
-          color="var(--beak-highlight)"
-          :size="24"
-          weight="fill"
-        />
+        <PhLightning class="stats-card-item-icon" color="var(--beak-highlight)" :size="24" weight="fill" />
 
         <div>
-          <TextSkeleton
-            v-if="user.totalXp == undefined"
-            width="60%"
-            height="22px"
-            color="var(--swan)"
-          />
-          <span v-else class="stats-card-item-data">{{ user.totalXp }}</span>
+          <TextSkeleton v-if="totalXp == undefined" width="60%" height="22px" color="var(--swan)" />
+          <span v-else class="stats-card-item-data">{{ totalXp }}</span>
 
           <span class="stats-card-item-label">total xp</span>
         </div>
@@ -48,20 +28,10 @@
 
     <div class="stats-card-item">
       <div>
-        <PhShield
-          class="stats-card-item-icon"
-          :color="`var(--${league.toLowerCase()})`"
-          :size="24"
-          weight="fill"
-        />
+        <PhShield class="stats-card-item-icon" :color="`var(--${league.toLowerCase()})`" :size="24" weight="fill" />
 
         <div>
-          <TextSkeleton
-            v-if="league == 'default'"
-            width="70%"
-            height="22px"
-            color="var(--swan)"
-          />
+          <TextSkeleton v-if="league == 'default'" width="70%" height="22px" color="var(--swan)" />
           <span v-else class="stats-card-item-data">{{ league }}</span>
 
           <span class="stats-card-item-label">current league</span>
@@ -71,23 +41,11 @@
 
     <div class="stats-card-item">
       <div>
-        <PhMedal
-          class="stats-card-item-icon"
-          color="var(--bee)"
-          :size="24"
-          weight="fill"
-        />
+        <PhMedal class="stats-card-item-icon" color="var(--bee)" :size="24" weight="fill" />
 
         <div>
-          <TextSkeleton
-            v-if="user.top_three_finishes == undefined"
-            width="30%"
-            height="22px"
-            color="var(--swan)"
-          />
-          <span v-else class="stats-card-item-data">{{
-            user.top_three_finishes
-          }}</span>
+          <TextSkeleton v-if="finishes == undefined" width="30%" height="22px" color="var(--swan)" />
+          <span v-else class="stats-card-item-data">{{ finishes }}</span>
 
           <span class="stats-card-item-label">top 3 finishes</span>
         </div>
@@ -99,18 +57,26 @@
 <script setup lang="ts">
 import { PhFire, PhLightning, PhMedal, PhShield } from "@phosphor-icons/vue";
 import TextSkeleton from "./skeletons/TextSkeleton.vue";
-import type { Profile } from "../types";
-import { Leagues } from "../types";
+import { useProfileStore } from '@/stores/user';
+import { Leagues } from "@/types";
 import { computed } from "vue";
 
-interface StatsCardProps {
-  user: Profile;
-}
+const profileStore = useProfileStore();
 
-const props = defineProps<StatsCardProps>();
+const finishes = computed(() => {
+  return profileStore.profile.top_three_finishes;
+});
+
+const streak = computed(() => {
+  return profileStore.profile.streak;
+});
+
+const totalXp = computed(() => {
+  return profileStore.profile.totalXp;
+});
 
 const league = computed(() => {
-  return Leagues[props.user.tier] ?? "default";
+  return Leagues[profileStore.profile.tier] ?? "default";
 });
 </script>
 

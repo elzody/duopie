@@ -10,11 +10,14 @@
 <script setup lang="ts">
 import { PhMagnifyingGlass, PhCircleNotch } from '@phosphor-icons/vue';
 import { ref, computed, watch } from 'vue';
-import { userStore } from '../stores/user';
+//import { userStore } from '../stores/user';
+import { useProfileStore } from '../stores/user';
 import { searchUser } from '../api';
 
 const timer = ref<number>(0);
 const userInput = ref<string>("");
+
+const profileStore = useProfileStore();
 
 const searching = computed(() => {
   return timer.value != 0;
@@ -26,7 +29,8 @@ watch(userInput, () => {
   timer.value = setTimeout(async () => {
     const profile = await searchUser(userInput.value);
 
-    userStore.setUser(profile);
+    //userStore.setUser(profile);
+    profileStore.setProfile(profile);
 
     timer.value = 0;
   }, 2000);

@@ -3,17 +3,19 @@
 
   <div id="main">
     <div id="user-info">
-      <UserCard :user="userStore.getUser()" />
-      <StatsCard :user="userStore.getUser()" />
+      <UserCard :user="profileStore.profile" />
+      <StatsCard :user="profileStore.profile" />
     </div>
 
-    <PieChart :user="userStore.getUser()" :radius="150" />
+    <PieChart :user="profileStore.profile" :radius="150" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { SearchBar, UserCard, StatsCard, PieChart } from "./components";
-import { userStore } from "./stores/user";
+import { useProfileStore } from "./stores/user";
+
+const profileStore = useProfileStore();
 </script>
 
 <style>
